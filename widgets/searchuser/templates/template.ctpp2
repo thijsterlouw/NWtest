@@ -1,7 +1,7 @@
 <div id="w-searchuser" class="m-rounded-corners">
 
     <div id="w-searchuser-bar">
-        <form name="searchuser" style="max-width: 500px;" method="get" action="/search/" >
+        <form id="w-searchuser-searchform" style="max-width: 500px;" method="get" action="/search/" >
             <input type="text" name="query" value=""/>
             <button type="submit" value="" value="search" style="height: 25px; width: 25px;"/>
         </form>
@@ -22,9 +22,14 @@
                 </TMPL_foreach>
                 
                 <TMPL_if su.pagination>
-                    <div class="w-searchuser-pagination">
-                    <TMPL_foreach su.pagination as page>
-                    <a href="<TMPL_var page.url>" onclick="return loadPage(<TMPL_var page.p>);"><TMPL_var page.p></a> 
+                    <div id="searchPagination" class="m-pagination">
+                    <TMPL_foreach su.pagination as paginationInfo>
+                        <TMPL_foreach paginationInfo.pages as page>
+                        <a href="<TMPL_var page.url>" class="m-pager"><TMPL_var page.p></a> 
+                        </TMPL_foreach>
+                        <TMPL_if paginationInfo.total>
+                            total: <TMPL_var paginationInfo.total>
+                        </TMPL_if>
                     </TMPL_foreach>
                     </div>
                 </TMPL_if>
